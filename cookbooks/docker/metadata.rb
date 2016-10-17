@@ -1,0 +1,6 @@
+name "docker"
+maintainer       "Ariel Moskovich"
+maintainer_email "relmos@gmail.com"
+license          "All rights reserved"
+description      "Example for docker engine installation"
+version          "0.0.1"
