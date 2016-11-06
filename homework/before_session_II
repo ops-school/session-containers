@@ -1,0 +1,7 @@
+* Install private docker registry: https://docs.docker.com/registry/deploying/
+
+* Kubetnetes overview: https://www.youtube.com/watch?v=WwBdNXt6wO4 
+
+* Docker networking tutarial: https://docs.docker.com/engine/userguide/networking/
+
+* Docker volumes tutarial: https://docs.docker.com/engine/tutorials/dockervolumes/

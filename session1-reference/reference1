@@ -1,0 +1,13 @@
+** Reference to class work:
+
+* Redis installation:
+
+1) update the system to latest update: apt-get update
+2) install using: apt-get install redis-server
+
+* connecting to redis:
+
+3) connecting to redis by redis-cli -h hostname/IP
+
+* creating docker hub free account
+4) Create user in docker hub: https://docs.docker.com/engine/getstarted/step_five/
