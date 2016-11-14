@@ -1,0 +1,7 @@
+1) create a directory /tmp/volpractice 
+2) create a an file in the direcotry above
+3) run a container that mount the direcotry above to /tmp/internal 
+4) Can you see the file?
+5) create a volume container name pracvol that map you home folder to /tmp/home as read-only (ex: /home/ariel:/tmp/home:ro)
+6) run a container that use the volume container above
+7) make sure you can see your home directory files and that you cannot modify them

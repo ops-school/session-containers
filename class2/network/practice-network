@@ -1,0 +1,5 @@
+1) inspect network bridge (docker network inspect bridge), how many conainers you see?
+2) let's create a new network bridge (docker network create --driver bridge --ip-range=172.34.0.0/16 --subnet=172.34.0.0/16 --gateway=172.34.0.1 --driver bridge docker1)
+3) list the available networks (docker network ls)
+4) let's run a new container with the network we created (docker run -it --net=docker1 ubuntu /bin/bash)
+5) what's the ipv4 address of the new container?
