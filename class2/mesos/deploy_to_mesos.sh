@@ -1,5 +1,4 @@
 #!/bin/bash
-echo $MARATHON
 CONTENT="Content-Type: application/json"
 DEPLOYS=("af-santa-clj-test-r2d2")
 echo "posting data to Marathon"
