@@ -1,0 +1,36 @@
+{
+    "id": "af-santa-clj-test",
+    "container": {
+        "type": "DOCKER",
+        "docker": {
+            "image": "registry-1.appsflyer.com/af-santa-clj-test-r2d2",
+            "network": "BRIDGE",
+            "portMappings": [
+		{
+                  "containerPort": 8976,
+                  "hostPort": 0,
+                  "protocol": "tcp"
+                },
+		{
+                  "containerPort": 2233,
+                  "hostPort": 0,
+                  "protocol": "tcp"
+                }
+            ]
+        }
+    },
+    "instances": 2,
+    "constraints": [["hostname", "UNIQUE"]],	
+    "cpus": 1,
+    "mem": 512,
+    "healthChecks": [{
+    "path": "/healthcheck",
+    "protocol": "HTTP",
+    "portIndex": 0,
+    "gracePeriodSeconds": 10,
+    "intervalSeconds": 20,
+    "timeoutSeconds": 20,
+    "maxConsecutiveFailures": 3,
+    "ignoreHttp1xx": false
+    }]
+}
