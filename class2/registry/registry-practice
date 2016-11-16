@@ -1,5 +1,5 @@
 1) run docker registry in you vm/laptop (docker run -d -p 5000:5000 --restart=always --name registry registry:2) 
 2) how many layers in the registry image? (you can use docker history --no-trunc=true to find out)
 3) what is the name of the configuration file that is being used? connect to the registry container (use docker exec with /bin/sh as command), which cache type is it using? (serach cache: blobdescriptor: in the congiuration file)
-4) tag the image that you created in the volume excerise with the new registry (docker tag imagename localhost:5000/imagename)
-5) push the image you created earlier to the registry (docker push localhost:5000/imagename)
+4) tag ubuntu image with the local running registry (docker tag ubuntu localhost:5000/ubuntu)
+5) push ubntu image to the local registry (docker push localhost:5000/ubuntu)
