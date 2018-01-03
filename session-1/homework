@@ -1,0 +1,15 @@
+Docker registry: install locally
+
+https://docs.docker.com/registry/
+
+Docker Networking
+
+Read: https://docs.docker.com/engine/userguide/networking/
+
+Docker volumes
+
+Read: https://docs.docker.com/engine/admin/volumes/volumes/
+
+Docker compose
+
+Exercise: https://docs.docker.com/compose/gettingstarted/

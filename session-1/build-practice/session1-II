@@ -1,0 +1,27 @@
+Play with Dockerfile 
+
+The directives we will use in that excersie:
+
+- FROM          sets the base image
+- ADD           copies new files directories or remote file urls
+- COPY          similar but doesn't support urls (see full differences in Docker docks) 
+- RUN           execute a command in a new layer 
+- ENV           sets an enviroment variable key:value
+- WORKDIR       sets the working directory for any other instructions in the build (ex: RUN,ADD,CMD)
+- EXPOSE        inform Docker that the contain listens on specific ports at run time
+- CMD           provide a default for executing a container
+
+
+"The Dockerfile"
+
+docker build
+docker tag
+docker push     
+
+Examine he image:
+
+1) Docker images
+2) /var/lib/docker/aufs/layers
+3) docker history
+4) docker commit
+5) docker save

@@ -1,0 +1,20 @@
+Hands on practice 30 min:
+
+A) Make sure that all have docker installed
+B) Make sure that all have Docker hub account
+
+1) show version: Docker version
+2) Run alpine container: docker run -it alpine /bin/ash
+3) Disconnect from the container: ctrl p + q
+4) Attach to the container: docker attach ID
+5) Run a command in a container: docker exec ID cat /etc/passwd
+6) Show containers: docker ps
+7) Show all containers: docker ps -a
+8) Show images: docker images
+9) Inspect container: docker inspect ID
+10) Stop container: docker stop ID
+11) start containerL docker start ID
+12) Show logs: docker logs ID
+13) Kill container: docker kill ID
+14) Delete container: docker rm ID
+15) Delete Image: docker rmi ID
