@@ -3,7 +3,8 @@
 3) How many layers are in the registry image? (you can use docker history --no-trunc=true IMAGEID)
 4) Let's connect to the registry container: docker exec -it DOCKERID /bin/sh
 5) Now we take a look at the configuration of the registry: cat /etc/docker/registry/config.yml
-6) Let's open another tab and push ubuntu image to the local registry:
+6) Let's open another tab and push alpine image to the local registry:
 A) We first tag it to the local registry: docker tag alpine localhost:5000/alpine
 B) Then we push it: docker push localhost:5000/alpine
 7) Now, let's see if we can see it in the repositories: ls /var/lib/registry/docker/registry/v2/repositories/ 
+
