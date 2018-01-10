@@ -1,0 +1,7 @@
+1) Check out the deafult bridge interface: ifconfig docker0, what's the ip of the default bridge?
+2) inspect network bridge: docker network inspect bridge, how many conainers do you see?
+3) let's create a new network bridge: docker network create --driver bridge --ip-range=172.34.0.0/16 --subnet=172.34.0.0/16 --gateway=172.34.0.1 --driver bridge docker1
+4) list the available networks: docker network ls, can you see the new bridge?
+5) let's run a new container on the new network: docker run -d --net=docker1 -p 8080:80 nginx
+6) inspect the new bridge: docker network inspect docker1
+7) run docker inspect containerid on the new container and browse to the networks section

@@ -1,0 +1,10 @@
+1) create a directory /tmp/volpractice: mkdir /tmp/volpractice 
+2) create a an file: opschoolt1 in the directory above: touch /tmp/volpractice/opschoolt1
+3) run a container that mount the directory above to /tmp/internal: docker run -d -v /tmp/volpractice/:/tmp/internal ubuntu sleep 10000  
+4) Let's check if we can see the file: docker exec containerid cat /tmp/internal/opsschoolt1 
+5) create a volume container name pracvol that map /etc folder to /tmp/etc as read-only: docker run -d --name pracvol -v /etc:/tmp/etc:ro ubuntu
+6) run a container that use the volume container above: docker run -it --volumes-from=pracvol ubuntu /bin/bash
+7) Let's see the host /etc in the container: ls /tmp/etc
+8) Disconnect from the container: ctrl p + q
+9) Run docker inspect on the running container: docker inspect dockerid | more, take a look at mounts, can you see the volume mounted?
+10) Now let's run a container that backu the volume: docker run -it --volumes-from=`docker ps -q | head -n 1` -v /etc:/tmp/etc -v /tmp/backup:/var/tmp ubuntu tar -cvzf /var/tmp/backup.tar.gz /tmp/etc
