@@ -1,0 +1,11 @@
+1) Create an aws t2.micro ubuntu 16.04 and install docker (see install description of session-1)
+2) Install docker compose:
+A) sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+B) sudo chmod +x /usr/local/bin/docker-compose
+3) create a directory named composed
+4) copy the files: all files in subdir compose to the directory
+5) run docker compose up -d, what do you see?
+6) curl http://$HOSTNAME:8500/v1/kv/?recurse, can you see the keys?
+7) install redis-tools: apt-get install redis-tools
+8) connect to the local redis: redis-cli and run keys *, can you see the urls?
+9) run docker-compose stop, how many containers where stopped? why?

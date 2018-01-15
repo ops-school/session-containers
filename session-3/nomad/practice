@@ -1,0 +1,19 @@
+1) create 3 instances of ubuntu 16.04, in the configuration of the instances do:
+A) choose instance type: t2.micro
+B) Add storage: 30g
+C) Configure security group: 22 & 4646 to myip
+D) After SG group is created add 4646 - 4648 to the security group itself
+********************************************************* See install.sh as reference *****************************************************************************
+2) Let's create several directories: /opt/nomad/bin, /opt/nomad/conf, /opt/nomad/data
+3) download the nomad binary at: wget https://releases.hashicorp.com/nomad/0.7.1/nomad_0.7.1_linux_amd64.zip -O nomad.zip; unzip nomad.zip -d /opt/nomad/bin
+4) let's add the binary to our path: export PATH=$PATH:/opt/nomad/bin (if you want to add permanently run echo "PATH=$PATH:/opt/nomad/bin" >> ~/.bashrc)
+***  makse sure you can run: "nomad version" ?
+5) Let's create nomad configuration:
+A) copy server.hcl and client.hcl to the conf directory
+6) Let's examine the configurations
+
+Now let's play with nomad:
+
+1) running nomad
+2) checking cluster status with command line
+3) 

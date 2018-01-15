@@ -1,0 +1,22 @@
+version: '3'
+services:
+  consulupdater:
+    build: .
+    depends_on:
+      - "consul"
+  rediswriter:
+    build:
+      context: .
+      dockerfile: Dockerfile-extra
+    depends_on:
+      - "consulupdater"
+      - "consul"
+      - "redis"
+  consul:
+    image: "consul"
+    ports:
+     - "8500:8500"
+  redis:
+    image: "redis"
+    ports:
+     - "6379:6379"

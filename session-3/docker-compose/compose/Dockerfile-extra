@@ -1,0 +1,6 @@
+FROM ubuntu:latest
+RUN apt-get update
+RUN apt-get install ruby -y
+RUN gem install redis
+ADD rediswriter.rb rediswriter.rb
+CMD ["ruby", "rediswriter.rb"]
