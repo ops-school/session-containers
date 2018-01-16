@@ -1,19 +1,82 @@
 1) create 3 instances of ubuntu 16.04, in the configuration of the instances do:
 A) choose instance type: t2.micro
 B) Add storage: 30g
-C) Configure security group: 22 & 4646 to myip
-D) After SG group is created add 4646 - 4648 to the security group itself
+C) Configure security group: TCP 22 & 4646 to myip (the public ip of your NAT)
+D) After SG group is created add 0 - 65535 to the security group itself (see opsschool-sg.png for reference)
+E) Install docker engine on the instances, you can use the install-docker.sh script in github session-3
 ********************************************************* See install.sh as reference *****************************************************************************
-2) Let's create several directories: /opt/nomad/bin, /opt/nomad/conf, /opt/nomad/data
+2) Let's create several directories: /opt/nomad/bin, /opt/nomad/conf, /opt/nomad/data, /opt/nomad/logs, /opt/consul/data, /opt/consul/bin, /opt/consul/logs
 3) download the nomad binary at: wget https://releases.hashicorp.com/nomad/0.7.1/nomad_0.7.1_linux_amd64.zip -O nomad.zip; unzip nomad.zip -d /opt/nomad/bin
-4) let's add the binary to our path: export PATH=$PATH:/opt/nomad/bin (if you want to add permanently run echo "PATH=$PATH:/opt/nomad/bin" >> ~/.bashrc)
-***  makse sure you can run: "nomad version" ?
-5) Let's create nomad configuration:
+We are going to use consul as service discovery, for the scope of thie exersice, we will install it only on the server:
+4) download the consul binary at: wget https://releases.hashicorp.com/consul/1.0.2/consul_1.0.2_linux_amd64.zip -O consul.zip;sudo  unzip consul.zip -d /opt/consul/bin
+5) can you run /opt/nomad/bin/nomad version ?
+6) Let's create nomad configuration:
 A) copy server.hcl and client.hcl to the conf directory
-6) Let's examine the configurations
+7) Let's examine the configurations
 
 Now let's play with nomad:
 
-1) running nomad
-2) checking cluster status with command line
-3) 
+8) run ec2metadata | grep ami-launch-index
+A) Let's decide that the instance that return 0 will act as your server
+B) index 1,2 will act as your clients
+C) on the master get the ip: ec2metadata | grep local-ipv4 | awk -F':' '{print $2}' | sed 's/ //g' (we will use that when configuring the clients)
+D) in all instances, let's edit /etc/hosts and add a line that map the server ip to the server.
+For example:
+
+If in the server:
+ubuntu@ip-172-31-94-195:~$ hostname -i
+172.31.94.195
+
+Then /etc/hosts of each instance will include the line "172.31.94.195 server"
+
+ubuntu@ip-172-31-94-195:~$ cat /etc/hosts
+127.0.0.1 localhost
+172.31.94.195 server
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+
+
+
+
+9) Let's run consul on the server: IP=`hostname -i`; sudo /opt/consul/bin/consul agent --bootstrap -server -client=$IP -bind=$IP -data-dir /opt/consul/data >> /opt/consul/logs/consul.log 2>&1 &
+
+10) Run the nomad server and clients:
+A) server: sudo /opt/nomad/bin/nomad agent -config /opt/nomad/conf/server.hcl >> /opt/nomad/logs/nomad.log 2>&1 &
+B) client: sudo /opt/nomad/bin/nomad agent -config /opt/nomad/conf/client.hcl >> /opt/nomad/logs/nomad.log 2>&1 &
+
+11) check the cluster status with command line: 
+ubuntu@ip-172-31-94-195:~$ nomad node-status
+ID        DC   Name             Class   Drain  Status
+5e61f710  dc1  ip-172-31-93-47  <none>  false  ready
+04a72684  dc1  ip-172-31-88-10  <none>  false  ready
+
+12) Also browse the UI: connect with a browser to your server external IP port 4646: http://yourexternalip:4646
+
+13) Run: nomad job status, do you see anything?
+
+14) Now, let's plan our first job: nomad plan mongo.nomad
+
+15) and run it: nomad run mongo.nomad
+
+16) can you see it now in the command line and browser? (nomad job status)
+********************************************************************************
+ubuntu@ip-172-31-94-195:~$ nomad job status
+ID       Type     Priority  Status   Submit Date
+mongodb  service  50        running  01/16/18 13:01:19 UTC
+********************************************************************************
+
+17) Let's inspect the job: nomad inspect mongo
+18) can we see the information in consul service discovery as well? curl http://$HOSTNAME:8500/v1/catalog/services | jq .
+19) or curl http://$HOSTNAME:8500/v1/agent/services | jq .
+20) now lets run an app that will use that mongo
+
+**** You have as a reference the coin.rb and the Dockerfile that created the relmos/coin that we are going to run)
+
+21) nomad plan coin.nomad
+22) nomad run coin.nomad
+

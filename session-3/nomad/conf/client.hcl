@@ -7,9 +7,14 @@ data_dir = "/opt/nomad/data/client"
 client {
     enabled = true
 
-    servers = ["127.0.0.1:4647"]
+    servers = ["server:4647"]
 }
 
 ports {
     http = 5656
 }
+
+consul {
+    address = "server:8500"
+}
+
