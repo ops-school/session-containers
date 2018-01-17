@@ -3,7 +3,7 @@
 A) sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 B) sudo chmod +x /usr/local/bin/docker-compose
 3) create a directory named composed
-4) copy the files: all files in subdir compose to the directory
+4) copy the files: all files in subdir compose to the directory (Let's just be lazy and run: git clone https://github.com/ops-school/session-containers.git)
 5) run docker compose up -d, what do you see?
 6) curl http://$HOSTNAME:8500/v1/kv/?recurse, can you see the keys?
 7) install redis-tools: apt-get install redis-tools
