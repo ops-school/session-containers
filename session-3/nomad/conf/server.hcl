@@ -10,5 +10,5 @@ server {
 }
 
 consul {
-    address = "server:8500"
+    address = "127.0.0.1:8500"
 }

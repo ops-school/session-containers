@@ -24,8 +24,9 @@ job "coin" {
       config {
         image = "relmos/coin"
       }
+      env = { "CONSUL" = "${attr.unique.hostname}" }
       resources {
-        cpu    = 150
+        cpu    = 200
         memory = 100
         network {
           mbits = 10
@@ -34,3 +35,4 @@ job "coin" {
     }
   }
 }
+

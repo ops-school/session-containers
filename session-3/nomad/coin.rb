@@ -13,11 +13,12 @@ def GetUrl(url)
     return(http.request(request))
 end
 
-hostname = Socket.gethostname
-mongosrv = JSON.parse(GetUrl("http://server:8500/v1/catalog/service/global-mongo-check").body)[0]['ServiceAddress']
+
+consulhost = ENV['CONSUL']
+mongosrv = JSON.parse(GetUrl("http://#{consulhost}:8500/v1/catalog/service/global-mongo-check").body)[0]['ServiceAddress']
 client = Mongo::Client.new([ mongosrv ], :database => 'coin')
 while true
     data = JSON.parse(GetUrl("http://api.coindesk.com/v1/bpi/currentprice.json").body)
-    client[:coins].insert_one data
-    sleep 10
+    client[:coin].insert_one(data)
+    sleep 1000
 end
