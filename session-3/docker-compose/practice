@@ -1,4 +1,4 @@
-1) Create an aws t2.micro ubuntu 16.04 and install docker (see install description of session-1)
+1) Create an aws t2.micro ubuntu 16.04 and install docker (you can use install-docker.sh)
 2) Install docker compose:
 A) sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 B) sudo chmod +x /usr/local/bin/docker-compose
