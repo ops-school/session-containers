@@ -10,22 +10,19 @@ E) Install docker engine on the instances, you can use the install-docker.sh scr
 We are going to use consul as service discovery, for the scope of thie exersice, we will install it only on the server:
 4) download the consul binary at: wget https://releases.hashicorp.com/consul/1.0.2/consul_1.0.2_linux_amd64.zip -O consul.zip;sudo  unzip consul.zip -d /opt/consul/bin
 5) can you run /opt/nomad/bin/nomad version ?
-6) Let's create nomad configuration:
-A) copy server.hcl and client.hcl to the conf directory
-B) on the master get the ip: ec2metadata | grep local-ipv4 | awk -F':' '{print $2}' | sed 's/ //g'
-C) change the server hostname with server ip
-** For example **
-
-sed -i 's/127.0.0.1/172.31.94.97/g' /opt/nomad/conf/*.hcl
+6) Let's create nomad configuration: copy server.hcl and client.hcl to the conf directory
 
 7) Let's examine the configurations
 
-Now let's play with nomad:
 
 8) run ec2metadata | grep ami-launch-index
 A) Let's decide that the instance that return 0 will act as your server
 B) index 1,2 will act as your clients
+C) on the master get the ip: ec2metadata | grep local-ipv4 | awk -F':' '{print $2}' | sed 's/ //g'
+D) change the server hostname with server ip
+*********** For example (Use your server I not the one below!!!!!!!!) **********
 
+sed -i 's/127.0.0.1/172.31.94.97/g' /opt/nomad/conf/*.hcl
 
 9) Let's run consul:
 on the server:
